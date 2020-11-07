@@ -36,6 +36,11 @@ namespace EmployeePayRollService
             var updatedSalary = salary.UpdateEmployeeSalary(salaryUpdateModel);
 
             Console.WriteLine(updatedSalary);
+
+            DateTime startDate = Convert.ToDateTime("01/01/2018");
+            DateTime endDate = Convert.ToDateTime("01/01/2019");
+
+            EmployeeRepo.GetAllEmployeeInGivenDateRange(startDate, endDate);
         }
     }
 }

@@ -8,17 +8,17 @@ namespace EmployeePayRollService
     class EmployeeRepo
     {
         public static string connectionString = @"Data Source=DESKTOP-SC0MR56\SQLEXPRESS;Initial Catalog=EmployeePayRoll_Service;Integrated Security=True";
-        SqlConnection connection = new SqlConnection(connectionString);
+        public static SqlConnection connection = new SqlConnection(connectionString);
         public void GetAllEmployee()
         {
             try
             {
                 EmployeeModel employeeModel = new EmployeeModel();
-                using (this.connection)
+                using (connection)
                 {
                     string query = @"Select * from employee_payroll;";
-                    SqlCommand cmd = new SqlCommand(query, this.connection);
-                    this.connection.Open();
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    connection.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
@@ -56,9 +56,9 @@ namespace EmployeePayRollService
         {
             try
             {
-                using (this.connection)
+                using (connection)
                 {
-                    SqlCommand command = new SqlCommand("SpAddEmployeeDetails", this.connection);
+                    SqlCommand command = new SqlCommand("SpAddEmployeeDetails", connection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@EmployeeName", model.name);
                     command.Parameters.AddWithValue("@PhoneNumber", model.phone);
@@ -74,9 +74,9 @@ namespace EmployeePayRollService
                     command.Parameters.AddWithValue("@StartDate", DateTime.Now);
                     //command.Parameters.AddWithValue("@City", model.City);
                     //command.Parameters.AddWithValue("@Country", model.Country);
-                    this.connection.Open();
+                    connection.Open();
                     var result = command.ExecuteNonQuery();
-                    this.connection.Close();
+                    connection.Close();
                     if (result != 0)
                     {
                         return true;
@@ -90,9 +90,62 @@ namespace EmployeePayRollService
             }
             finally
             {
-                this.connection.Close();
+                connection.Close();
             }
             return false;
+        }
+
+
+        
+
+        public static void GetAllEmployeeInGivenDateRange(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var employeeModel = new EmployeeModel();
+                using (connection)
+                {
+                    var query = @"Select * from employee_payroll where start_date > @startDate AND start_date < @endDate";
+                    var sqlCommand = new SqlCommand(query, connection);
+                    sqlCommand.Parameters.AddWithValue("@startDate", startDate);
+                    sqlCommand.Parameters.AddWithValue("@endDate", endDate);
+
+                    connection.Open();
+                    var dataReader = sqlCommand.ExecuteReader();
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            employeeModel.id = dataReader.GetInt32(0);
+                            employeeModel.name = dataReader.GetString(1);
+                            employeeModel.salary = dataReader.GetInt32(2);
+                            employeeModel.start = dataReader.GetDateTime(3);
+                            employeeModel.gender = Convert.ToChar(dataReader.GetString(4));
+                            employeeModel.phone = dataReader.GetString(5);
+                            employeeModel.Department = dataReader.GetString(6);
+                            employeeModel.address = dataReader.GetString(7);
+
+                            /*employeeModel.BasicPay = dataReader.GetInt32(8);
+                            employeeModel.TaxablePay = dataReader.GetInt32(9);
+                            employeeModel.Tax = dataReader.GetInt32(10);
+                            employeeModel.NetPay = dataReader.GetInt32(11);*/
+                            employeeModel.Display();
+
+                        }
+                    }
+                    else
+                        Console.WriteLine("No Data Found");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }

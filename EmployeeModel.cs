@@ -23,7 +23,12 @@ namespace EmployeePayRollService
 
         public string Department { get; set; }
 
-
+        public void Display()
+        {
+            Console.WriteLine(id + " " + name + " " + salary + " " + phone + " " + address + " " +
+                Department + " " + gender + " " + Deduction + " " + taxable_pay + " " + taxable_pay + " " + net_pay);
+            Console.WriteLine();
+        }
 
     }
 }
