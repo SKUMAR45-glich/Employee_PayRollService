@@ -26,6 +26,16 @@ namespace EmployeePayRollService
 
             if (repo.AddEmployee(employee))
                 Console.WriteLine("Records added successfully");
+
+
+
+            Salary salary = new Salary();
+
+            SalaryUpdateModel salaryUpdateModel = new SalaryUpdateModel { SalaryId = 1, EmployeeSalary = 3000000 };
+
+            var updatedSalary = salary.UpdateEmployeeSalary(salaryUpdateModel);
+
+            Console.WriteLine(updatedSalary);
         }
     }
 }
