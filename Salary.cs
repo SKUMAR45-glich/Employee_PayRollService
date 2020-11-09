@@ -16,37 +16,35 @@ namespace EmployeePayRollService
         {
             SqlConnection SalaryConnection = ConnectionSetup();
             int salary = 0;
-
             try
             {
                 using (SalaryConnection)
                 {
                     SalaryDetailModel displayModel = new SalaryDetailModel();
-                    SqlCommand command = new SqlCommand("spUpdateEmployeeSalary", SalaryConnection);
+                    SqlCommand command = new SqlCommand("spUpdateEmployeeSalary_", SalaryConnection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@id", salaryUpdateModel.SalaryId);
-                    command.Parameters.AddWithValue("@month", salaryUpdateModel.Month);
-                    command.Parameters.AddWithValue("@salary", salaryUpdateModel.EmployeeSalary);
-                    command.Parameters.AddWithValue("@EmpId", salaryUpdateModel.EmployeeId);
+                    var cmd = new SqlCommand("Select Id from Employee where EmployeeName='Terissa'", SalaryConnection);
                     SalaryConnection.Open();
-                    SqlDataReader dr = command.ExecuteReader();
 
+                    var reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                        salaryUpdateModel.SalaryId = Convert.ToInt32(reader.GetInt32(0));
+                    reader.Close();
+                    command.Parameters.AddWithValue("@id", salaryUpdateModel.SalaryId);
+                    command.Parameters.AddWithValue("@salary", salaryUpdateModel.EmployeeSalary);
+                    command.Parameters.AddWithValue("@EmpID", salaryUpdateModel.EmployeeId);
+                    SqlDataReader dr = command.ExecuteReader();
                     if (dr.HasRows)
                     {
                         while (dr.Read())
                         {
-                            displayModel.SalaryId = Convert.ToInt32(dr["SALARYId"]);
-                            //displayModel.JobDescription = dr["jOB"].ToString();
-                            displayModel.Month = dr["SAL_MONTH"].ToString();
-                            displayModel.EmployeeSalary = Convert.ToInt32(dr["EMPSAL"]);
-                            displayModel.EmployeeId = Convert.ToInt32(dr["EmpId"]);
-
-                            //displayModel.EmployeeName = dr["ENAME"].ToString();
-
-                            Console.WriteLine(displayModel.EmployeeName + " " + displayModel.EmployeeSalary + " " + displayModel.EmployeeId);
+                            displayModel.EmployeeId = Convert.ToInt32(dr["Id"]);
+                            displayModel.EmployeeName = dr["Name"].ToString();
+                            displayModel.EmployeeSalary = Convert.ToInt32(dr["Salary"]);
+                            Console.WriteLine(displayModel.EmployeeId + " " + displayModel.EmployeeName + " " + displayModel.EmployeeSalary);
                             Console.WriteLine("\n");
                             salary = displayModel.EmployeeSalary;
-
                         }
                     }
                     else

@@ -24,18 +24,18 @@ namespace EmployeePayRollService
             employee.NetPay = 1200.00;
             employee.StartDate = Convert.ToDateTime("2020-11-03");
 
-            if (repo.AddEmployee(employee))
+            /*if (repo.AddEmployee(employee))
                 Console.WriteLine("Records added successfully");
+            */
 
 
+            Salary salary = new Salary();
 
-            //Salary salary = new Salary();
+            SalaryUpdateModel salaryUpdateModel = new SalaryUpdateModel { SalaryId = 1, EmployeeSalary = 3000000 };
 
-            //SalaryUpdateModel salaryUpdateModel = new SalaryUpdateModel { SalaryId = 1, EmployeeSalary = 3000000 };
+            var updatedSalary = salary.UpdateEmployeeSalary(salaryUpdateModel);
 
-            //var updatedSalary = salary.UpdateEmployeeSalary(salaryUpdateModel);
-
-            //Console.WriteLine(updatedSalary);
+            Console.WriteLine(updatedSalary);
 
             /*DateTime startDate = Convert.ToDateTime("01/01/2018");
             DateTime endDate = Convert.ToDateTime("01/01/2019");
