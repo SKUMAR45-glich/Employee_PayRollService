@@ -12,35 +12,35 @@ namespace EmployeePayRollService
             repo.GetAllEmployee();
 
             EmployeeModel employee = new EmployeeModel();
-            employee.name = "Indal";
+            employee.EmployeeName = "Indal";
             employee.Department = "Tech";
-            employee.phone = "6302907918";
-            employee.address = "02-Khajauli";
-            employee.gender = 'M';
-            employee.salary = 10000.00M;
-            employee.Deduction = 1500.00;
-            employee.taxable_pay = 2500.00;
-            employee.income_tax = 1800.00;
-            employee.net_pay = 1200.00;
-            employee.start = employee.start = Convert.ToDateTime("2020-11-03");
+            employee.PhoneNumber = "6302907918";
+            employee.Address = "02-Khajauli";
+            employee.Gender = 'M';
+            employee.BasicPay = 10000.00M;
+            employee.Deductions = 1500.00;
+            employee.TaxablePay = 2500.00;
+            employee.Tax = 1800.00;
+            employee.NetPay = 1200.00;
+            employee.StartDate = Convert.ToDateTime("2020-11-03");
 
             if (repo.AddEmployee(employee))
                 Console.WriteLine("Records added successfully");
 
 
 
-            Salary salary = new Salary();
+            //Salary salary = new Salary();
 
-            SalaryUpdateModel salaryUpdateModel = new SalaryUpdateModel { SalaryId = 1, EmployeeSalary = 3000000 };
+            //SalaryUpdateModel salaryUpdateModel = new SalaryUpdateModel { SalaryId = 1, EmployeeSalary = 3000000 };
 
-            var updatedSalary = salary.UpdateEmployeeSalary(salaryUpdateModel);
+            //var updatedSalary = salary.UpdateEmployeeSalary(salaryUpdateModel);
 
-            Console.WriteLine(updatedSalary);
+            //Console.WriteLine(updatedSalary);
 
-            DateTime startDate = Convert.ToDateTime("01/01/2018");
+            /*DateTime startDate = Convert.ToDateTime("01/01/2018");
             DateTime endDate = Convert.ToDateTime("01/01/2019");
 
-            EmployeeRepo.GetAllEmployeeInGivenDateRange(startDate, endDate);
-        }
+            repo.GetAllEmployeeInGivenDateRange(startDate, endDate);
+        */}
     }
 }
