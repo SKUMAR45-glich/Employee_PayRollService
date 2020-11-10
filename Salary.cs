@@ -12,10 +12,11 @@ namespace EmployeePayRollService
             return new SqlConnection(@"Data Source=DESKTOP-SC0MR56\SQLEXPRESS;Initial Catalog=EmployeePayRoll_Service;Integrated Security=True");
         }
 
-        public int UpdateEmployeeSalary(SalaryUpdateModel salaryUpdateModel)
+        public bool UpdateEmployeeSalary(SalaryUpdateModel salaryUpdateModel)
         {
             SqlConnection SalaryConnection = ConnectionSetup();
             int salary = 0;
+            bool update = false;
             try
             {
                 using (SalaryConnection)
@@ -45,6 +46,7 @@ namespace EmployeePayRollService
                             Console.WriteLine(displayModel.EmployeeId + " " + displayModel.EmployeeName + " " + displayModel.EmployeeSalary);
                             Console.WriteLine("\n");
                             salary = displayModel.EmployeeSalary;
+                            update = displayModel.IsUpdated;
                         }
                     }
                     else
@@ -62,7 +64,8 @@ namespace EmployeePayRollService
             {
                 SalaryConnection.Close();
             }
-            return salary;
+            //return salary;
+            return update;
         }
     }
 }

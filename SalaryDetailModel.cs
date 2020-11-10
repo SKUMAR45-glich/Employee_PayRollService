@@ -13,5 +13,7 @@ namespace EmployeePayRollService
         public int EmployeeSalary { get; set; }
         public int SalaryId { get; set; }
 
+        public bool IsUpdated { get; } = true;
+
     }
 }

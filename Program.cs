@@ -52,11 +52,22 @@ namespace EmployeePayRollService
 
             ///   UC9_JustForImplication
 
-            //Salary salary = new Salary();                                                        // Salary Model
+            Salary salary = new Salary();                                                        // Salary Model
 
-            //SalaryUpdateModel salaryUpdateModel = new SalaryUpdateModel { SalaryId = 1, EmployeeSalary = 3000000 };               //Update Salary
+            SalaryUpdateModel salaryUpdateModel = new SalaryUpdateModel { SalaryId = 1, EmployeeSalary = 3000000 };               //Update Salary
 
-            //var updatedSalary = salary.UpdateEmployeeSalary(salaryUpdateModel);
+            bool updatedSalary = salary.UpdateEmployeeSalary(salaryUpdateModel);
+
+            if(updatedSalary==true)
+            {
+                if(employee.EmployeeID == salaryUpdateModel.SalaryId)
+                {
+                    employee.BasicPay = salaryUpdateModel.EmployeeSalary;
+                    repo.AddEmployee(employee);
+                }
+                
+            }
+
 
             //Console.WriteLine(updatedSalary);
 
