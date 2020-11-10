@@ -48,6 +48,10 @@ namespace EmployeePayRollService
                     Console.WriteLine("Records added successfully");                               //Adding Data to Table
             }
 
+
+
+            ///   UC9_JustForImplication
+
             //Salary salary = new Salary();                                                        // Salary Model
 
             //SalaryUpdateModel salaryUpdateModel = new SalaryUpdateModel { SalaryId = 1, EmployeeSalary = 3000000 };               //Update Salary
