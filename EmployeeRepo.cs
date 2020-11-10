@@ -127,5 +127,50 @@ namespace EmployeePayRollService
                 connection.Close();
             }
         }
+
+        public int GetInsertionsinEmployeeTable(EmployeeModel employeeModel)
+        {
+            int count = 0;
+            try
+            {
+                //EmployeeModel employeeModel = new EmployeeModel();
+
+
+                this.connection.Open();
+                var query = @"SELECT  COUNT(*) AS number_of_Employees
+                                    FROM employee_payroll";
+
+                var sqlCommand = new SqlCommand(query, this.connection);
+
+                var reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        count = reader.GetInt32(0);
+
+                        return count;
+
+                    }
+                }
+
+                else
+                    return 0;
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return 0;
+            }
+            finally
+            {
+                //return count;
+                connection.Close();
+                
+            }
+            return count;
+        }
     }
 }

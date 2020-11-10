@@ -26,8 +26,27 @@ namespace EmployeePayRollService
 
             if (repo.AddEmployee(employee))                                                        
                 Console.WriteLine("Records added successfully");                                 //Adding Data to Table
-            
 
+
+            int count = repo.GetInsertionsinEmployeeTable(employee);
+
+            if(count>2)
+            {
+                employee.EmployeeName = Console.ReadLine();
+                employee.Department = Console.ReadLine();
+                employee.PhoneNumber = Console.ReadLine();
+                employee.Address = Console.ReadLine();
+                employee.Gender = Convert.ToChar(Console.ReadLine());
+                employee.BasicPay = (System.Data.SqlTypes.SqlMoney)Convert.ToDouble(Console.ReadLine());
+                employee.Deductions = Convert.ToDouble(Console.ReadLine());
+                employee.TaxablePay = Convert.ToDouble(Console.ReadLine());
+                employee.Tax = Convert.ToDouble(Console.ReadLine());
+                employee.NetPay = Convert.ToDouble(Console.ReadLine());
+                employee.StartDate = Convert.ToDateTime(Console.ReadLine());
+
+                if (repo.AddEmployee(employee))
+                    Console.WriteLine("Records added successfully");                               //Adding Data to Table
+            }
 
             //Salary salary = new Salary();                                                        // Salary Model
 
