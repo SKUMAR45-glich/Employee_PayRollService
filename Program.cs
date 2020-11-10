@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 
 namespace EmployeePayRollService
 {
@@ -9,25 +8,25 @@ namespace EmployeePayRollService
         {
             Console.WriteLine("Welcome To Employee PayRoll Service!");
 
-            EmployeeRepo repo = new EmployeeRepo();                                             //Declare Object for EmployeeRepo Class
-            repo.GetAllEmployee();                                                              //Get Details for Employee
+            EmployeeRepo repo = new EmployeeRepo();                                    //Declare Object for EmployeeRepo Class
+            repo.GetAllEmployee();                                                    //Get Details for Employee
 
-            EmployeeModel employee = new EmployeeModel();                                       //Declare Object for EmployeeModel Class
-            employee.EmployeeName = "Indal";
-            employee.Department = "Tech";
-            employee.PhoneNumber = "6302907918";
-            employee.Address = "02-Khajauli";
+            EmployeeModel employee = new EmployeeModel();                           //Declare Object for EmployeeModel Class
+            employee.EmployeeName = "XYZ";
+            employee.Department = "Management";
+            employee.PhoneNumber = "6302907917";
+            employee.Address = "12-AAAAAAA";
             employee.Gender = 'M';
-            employee.BasicPay = 10000.00M;
-            employee.Deductions = 1500.00;
-            employee.TaxablePay = 2500.00;
-            employee.Tax = 1800.00;
-            employee.NetPay = 1200.00;
-            employee.StartDate = Convert.ToDateTime("2020-11-03");
+            employee.BasicPay = 11000.00M;
+            employee.Deductions = 1600.00;
+            employee.TaxablePay = 2600.00;
+            employee.Tax = 1900.00;
+            employee.NetPay = 1500.00;
+            employee.StartDate = Convert.ToDateTime("2020-11-08");
 
-            /*if (repo.AddEmployee(employee))                                                        
+            if (repo.AddEmployee(employee))                                                        
                 Console.WriteLine("Records added successfully");                                 //Adding Data to Table
-            */
+            
 
 
             //Salary salary = new Salary();                                                        // Salary Model
@@ -43,7 +42,7 @@ namespace EmployeePayRollService
 
             repo.GetAllEmployeeInGivenDateRange(startDate, endDate);
         */
-            repo.GetCountAvgMinMaxinEmployee(employee);                                             //Get Females Count with Max Min Data
+            //repo.GetCountAvgMinMaxinEmployee(employee);                                             //Get Females Count with Max Min Data
         
         }
     }

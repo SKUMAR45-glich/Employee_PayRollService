@@ -20,8 +20,7 @@ namespace EmployeePayRollService
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
-                    Console.WriteLine("\tID\tNAME\t\tSALARY\t\tSTART DATE");
-                    Console.WriteLine("\t--\t----\t\t------\t\t----------");
+                    Console.WriteLine("\tID\tNAME\t\tSALARY\t\tSTART DATE\n");
                     while (dr.Read())
                     {
                         employeeModel.EmployeeID = dr.GetInt32(0);
@@ -29,19 +28,19 @@ namespace EmployeePayRollService
                         employeeModel.BasicPay = dr.GetSqlMoney(2);
                         employeeModel.StartDate = dr.GetDateTime(3);
 
-                        Console.WriteLine("\t" + employeeModel.EmployeeID + "\t" + employeeModel.EmployeeName + "\t\t" + employeeModel.BasicPay + "\t" + employeeModel.StartDate);
-                        Console.WriteLine("\t------------------------------------------------------------");
+                        Console.WriteLine("\t" + employeeModel.EmployeeID + "\t" + employeeModel.EmployeeName + "\t\t" + employeeModel.BasicPay + "\t" + employeeModel.StartDate+"\n");
+                        
                     }
                 }
                 else
                 {
-                    System.Console.WriteLine("No data found");
+                    Console.WriteLine("No data found");
                 }
 
             }
             catch (Exception e)
             {
-                System.Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
             finally
             {
