@@ -77,7 +77,9 @@ namespace EmployeePayRollService
             repo.GetAllEmployeeInGivenDateRange(startDate, endDate);
         */
             //repo.GetCountAvgMinMaxinEmployee(employee);                                             //Get Females Count with Max Min Data
-        
+
+
+            repo.RemoveEmployeeDetails("Indal", 8);
         }
     }
 }

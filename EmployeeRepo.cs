@@ -172,5 +172,18 @@ namespace EmployeePayRollService
             }
             return count;
         }
+
+        public void RemoveEmployeeDetails(string name, int id)
+        {
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("delete from Employee_PayRoll where Name = @EmployeeName and id = @EmployeeId", connection);
+                command.Parameters.AddWithValue("@EmployeeName", name);
+                command.Parameters.AddWithValue("@EmployeeId",id);
+                connection.Open();
+                int result = command.ExecuteNonQuery();
+                Console.WriteLine(result + " deleted");
+            }
+        }
     }
 }
